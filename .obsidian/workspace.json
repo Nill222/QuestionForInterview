@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Java/JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6.md",
+                "file": "Вопросы для собеседования/Java Classes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6"
+              "title": "Java Classes"
             }
           }
         ],
@@ -201,6 +201,7 @@
   },
   "active": "53865dc4cc554e4e",
   "lastOpenFiles": [
+    "Java/JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6.md",
     "Без названия.base",
     "Основы SQL  1.pdf",
     "Основы SQL .pdf",
@@ -218,7 +219,6 @@
     "Java/Патерны/Патерн репозиторий.md",
     "Java/Патерны",
     "Java/Java Коллекции.md",
-    "Java/JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6.md",
     "Java/JVM.md",
     "Pasted image 20251116144349.png",
     "Pasted image 20251116144356.png",
