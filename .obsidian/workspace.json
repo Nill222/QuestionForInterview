@@ -199,8 +199,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "53865dc4cc554e4e",
+  "active": "7e5b122b1a16101e",
   "lastOpenFiles": [
+    "Вопросы для собеседования/Java Fundamentals.md",
+    "Вопросы для собеседования/Java Classes.md",
     "Java/JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6.md",
     "Без названия.base",
     "Основы SQL  1.pdf",
@@ -209,9 +211,7 @@
     "Без названия.canvas",
     "README.md",
     "Test/README.md",
-    "Вопросы для собеседования/Java Fundamentals.md",
     "Test",
-    "Вопросы для собеседования/Java Classes.md",
     "Вопросы для собеседования/Java Strings.md",
     "Java/Java Core.md",
     "Java/Патерны/Патерн Singleton.md",
