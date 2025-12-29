@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Вопросы для собеседования/Java Classes.md",
+                "file": "Вопросы для собеседования/Java Collection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Java Classes"
+              "title": "Java Collection"
             }
           }
         ],
@@ -201,9 +201,15 @@
   },
   "active": "53865dc4cc554e4e",
   "lastOpenFiles": [
-    "Вопросы для собеседования/44 - 50 java classes.md",
+    "Вопросы для собеседования/Многопоточность.md",
+    "Вопросы для собеседования/Java Collection.md",
+    "Вопросы для собеседования/Java XML.md",
+    "Вопросы для собеседования/Java TestNG JUnit.md",
+    "Вопросы для собеседования/Java Exceptions.md",
+    "Вопросы для собеседования/Java I O.md",
     "Вопросы для собеседования/Java Classes.md",
     "Вопросы для собеседования/Java Fundamentals.md",
+    "Вопросы для собеседования/44 - 50 java classes.md",
     "Java/JWT-аутентификация при помощи Spring Boot 3 и Spring Security 6.md",
     "Без названия.base",
     "Основы SQL  1.pdf",
@@ -233,11 +239,6 @@
     "Java/Git.md",
     "Java/Hibernate.md",
     "Java/Java Классы и ООП.md",
-    "Java/Spring.md",
-    "SQL/Индексы, View, Процедуры.md",
-    "SQL/Транзакции.md",
-    "SQL/DML  DDL  DCL  TCL.md",
-    "SQL/Join.md",
     "SQL",
     "Java"
   ]
