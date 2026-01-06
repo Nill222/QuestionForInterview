@@ -1,11 +1,19 @@
-## 1. JVM, JDK, JRE
+## 1. JVM, JDK, JRE https://alexkosarev.name/2024/09/17/jvm-jre-jdk/
 
 - **JVM (Java Virtual Machine)** Виртуальная машина, которая исполняет байт-код (`.class` файлы). Она обеспечивает переносимость: один и тот же байт-код работает на разных ОС.
     
 - **JRE (Java Runtime Environment)** Среда выполнения Java. Включает JVM + стандартные библиотеки (rt.jar и др.). Нужна для запуска программ.
     
 - **JDK (Java Development Kit)** Набор инструментов для разработки. Включает JRE + компилятор `javac`, отладчики, документацию.
-    
+## Итоги
+
+- JVM — виртуальная машина Java, выполняет байткод Java
+- JRE — среда выполнения Java, необходимая для запуска программ на платформе Java, в которую входит JVM
+- JDK — набор инструментов для разработки отладки программ для платформы Java
+- Если вам нужно запускать Java-программы, то достаточно JRE, если хотите разрабатывать их сами, то нужен JDK
+- OpenJDK — основная реализация JDK с открытым исходным кодом
+- TCK — набор тестов совместимости сборки JDK с платформой Java
+- В условиях реальной эксплуатации лучше использовать версии платформы Java с долгосрочной поддержкой (LTS)
 
 👉 Взаимодействие: `JDK` → содержит `JRE` → внутри `JRE` работает `JVM`.
 
@@ -29,7 +37,7 @@ java com.example.MyClass
 
 ## 3. JIT-компилятор
 
-- **Just-In-Time Compiler** — часть JVM.
+- **Just-In-Time Compiler** — часть JVM. Задача JIT-компилятора — компилировать «на ходу» часто используемые части байткода Java в набор нативных вызовов, благодаря чему повышается производительность программ, написанных для платформы Java.
     
 - Переводит часто используемый байт-код в машинный код во время выполнения.
     
@@ -41,11 +49,35 @@ java com.example.MyClass
 
 - **Classpath** — путь, где JVM ищет классы и библиотеки.
     
-- Если указаны две версии одной библиотеки: JVM загрузит **первую найденную** в classpath.
+- Если указаны две версии одной библиотеки: JVM загрузит **первую найденную** в  classpath.
     
 - Итог: порядок в classpath критичен.
+### Как Maven формирует classpath
 
-## 5. Области памяти JVM
+- Maven сам по себе не запускает JVM напрямую — он управляет зависимостями и сборкой проекта.
+    
+- Когда ты запускаешь `mvn compile`, `mvn test` или `mvn exec:java`, Maven формирует **classpath** из:
+    
+    - `target/classes` (скомпилированные классы твоего проекта),
+        
+    - `target/test-classes` (для тестов),
+        
+    - всех JAR-зависимостей, которые он скачал в локальный репозиторий (`~/.m2/repository`).
+        
+
+### 📚 Конфликты версий
+
+- Если в зависимостях указаны разные версии одной библиотеки (например, `commons-lang:2.6` и `commons-lang:3.12.0`), Maven должен выбрать одну.
+    
+- Выбор происходит через механизм **dependency resolution**:
+    
+    - Maven строит дерево зависимостей.
+        
+    - Если встречаются разные версии одной библиотеки, Maven применяет правило **"nearest definition wins"** — то есть берётся та версия, которая ближе к корню дерева зависимостей (к твоему `pom.xml`).
+        
+    - В случае одинаковой "глубины" выигрывает первая по порядку.
+
+## 5. Области памяти JVM!!!!https://habr.com/ru/companies/otus/articles/445312/
 
 - **Heap (куча)** — хранение объектов, пул строк.
     
@@ -56,6 +88,25 @@ java com.example.MyClass
 - **PC Register** — хранит адрес текущей инструкции для каждого потока.
     
 - **Native Method Stack** — стек для вызовов нативного кода (C/C++).
+
+1. **Куча ([Heap](https://www.google.com/search?client=opera-gx&q=Heap&sourceid=opera&ie=UTF-8&oe=UTF-8&mstk=AUtExfC4DKthcdLHGuY4efBe_zLkzcVVLI3yIASG_KRKTGjzMkuA6v2i7IQRG1GODNaCpV00P7JLaNJGsKqJp3U9jX8-l3vXWjp4Izqf7odte6g9ZxWzAX57vsG68SldHQwP211X2-kUk9A_Gbejl00XCsIPNzcEBqMek0QwHBeEepYuSgv_Zg1BmWY0IiZDPgUnRIRofPcMv24oq9q3LPwpst4HCVSSAdgIao4D9m-SyRRQCebZhLiH7t8zVIuG-iVb0H4b3d64ITwHtYyXtol-G9WPLFxpuVA0Dwkxmqqt5iX1dw&csui=3&ved=2ahUKEwihpqDh0PaRAxWUR1UIHTDSKUsQgK4QegQIAxAB))**
+    - Хранит все объекты Java, создаваемые во время выполнения программы.
+    - Управляется сборщиком мусора (GC).
+    - Делится на поколения для оптимизации:
+        - **[Молодое Поколение](https://www.google.com/search?client=opera-gx&q=%D0%9C%D0%BE%D0%BB%D0%BE%D0%B4%D0%BE%D0%B5+%D0%9F%D0%BE%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5&sourceid=opera&ie=UTF-8&oe=UTF-8&mstk=AUtExfC4DKthcdLHGuY4efBe_zLkzcVVLI3yIASG_KRKTGjzMkuA6v2i7IQRG1GODNaCpV00P7JLaNJGsKqJp3U9jX8-l3vXWjp4Izqf7odte6g9ZxWzAX57vsG68SldHQwP211X2-kUk9A_Gbejl00XCsIPNzcEBqMek0QwHBeEepYuSgv_Zg1BmWY0IiZDPgUnRIRofPcMv24oq9q3LPwpst4HCVSSAdgIao4D9m-SyRRQCebZhLiH7t8zVIuG-iVb0H4b3d64ITwHtYyXtol-G9WPLFxpuVA0Dwkxmqqt5iX1dw&csui=3&ved=2ahUKEwihpqDh0PaRAxWUR1UIHTDSKUsQgK4QegQIAxAG) (Young Generation)**: Новые объекты попадают сюда. Разделено на **Eden Space** (Эдем), где создаются объекты, и два **Survivor Spaces (S0, S1)** (Выжившие), куда перемещаются живые объекты после Minor GC (младшего сборщика мусора).
+        - **[Старое Поколение](https://www.google.com/search?client=opera-gx&q=%D0%A1%D1%82%D0%B0%D1%80%D0%BE%D0%B5+%D0%9F%D0%BE%D0%BA%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5&sourceid=opera&ie=UTF-8&oe=UTF-8&mstk=AUtExfC4DKthcdLHGuY4efBe_zLkzcVVLI3yIASG_KRKTGjzMkuA6v2i7IQRG1GODNaCpV00P7JLaNJGsKqJp3U9jX8-l3vXWjp4Izqf7odte6g9ZxWzAX57vsG68SldHQwP211X2-kUk9A_Gbejl00XCsIPNzcEBqMek0QwHBeEepYuSgv_Zg1BmWY0IiZDPgUnRIRofPcMv24oq9q3LPwpst4HCVSSAdgIao4D9m-SyRRQCebZhLiH7t8zVIuG-iVb0H4b3d64ITwHtYyXtol-G9WPLFxpuVA0Dwkxmqqt5iX1dw&csui=3&ved=2ahUKEwihpqDh0PaRAxWUR1UIHTDSKUsQgK4QegQIAxAI) (Old Generation)**: Объекты, пережившие несколько циклов Minor GC, переходят сюда.
+2. **Не Куча (Non-Heap)**:
+    - **[Metaspace](https://www.google.com/search?client=opera-gx&q=Metaspace&sourceid=opera&ie=UTF-8&oe=UTF-8&mstk=AUtExfC4DKthcdLHGuY4efBe_zLkzcVVLI3yIASG_KRKTGjzMkuA6v2i7IQRG1GODNaCpV00P7JLaNJGsKqJp3U9jX8-l3vXWjp4Izqf7odte6g9ZxWzAX57vsG68SldHQwP211X2-kUk9A_Gbejl00XCsIPNzcEBqMek0QwHBeEepYuSgv_Zg1BmWY0IiZDPgUnRIRofPcMv24oq9q3LPwpst4HCVSSAdgIao4D9m-SyRRQCebZhLiH7t8zVIuG-iVb0H4b3d64ITwHtYyXtol-G9WPLFxpuVA0Dwkxmqqt5iX1dw&csui=3&ved=2ahUKEwihpqDh0PaRAxWUR1UIHTDSKUsQgK4QegQIAxAL)** (с Java 8, ранее PermGen): Хранит метаданные классов (пулы констант, описание методов/полей), код классов.
+    - **Стек (Stack)**: Для каждого потока создается свой стек. Хранит локальные переменные, параметры методов, ссылки на объекты (но не сами объекты).
+    - **[Регистр ПК](https://www.google.com/search?client=opera-gx&q=%D0%A0%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80+%D0%9F%D0%9A&sourceid=opera&ie=UTF-8&oe=UTF-8&mstk=AUtExfC4DKthcdLHGuY4efBe_zLkzcVVLI3yIASG_KRKTGjzMkuA6v2i7IQRG1GODNaCpV00P7JLaNJGsKqJp3U9jX8-l3vXWjp4Izqf7odte6g9ZxWzAX57vsG68SldHQwP211X2-kUk9A_Gbejl00XCsIPNzcEBqMek0QwHBeEepYuSgv_Zg1BmWY0IiZDPgUnRIRofPcMv24oq9q3LPwpst4HCVSSAdgIao4D9m-SyRRQCebZhLiH7t8zVIuG-iVb0H4b3d64ITwHtYyXtol-G9WPLFxpuVA0Dwkxmqqt5iX1dw&csui=3&ved=2ahUKEwihpqDh0PaRAxWUR1UIHTDSKUsQgK4QegQIAxAO) (Program Counter Register)**: Хранит адрес следующей инструкции для каждого потока.
+    - **Стеки Нативных Методов (Native Method Stacks)**: Используются для нативных (не-Java) методов. 
+
+Ключевые моменты:
+
+- **Куча (Heap)** — самая большая область, объекты здесь живут долго, управляется GC.
+- **Стек (Stack)** — для каждого потока, временные данные, не управляется GC.
+- **Metaspace (ранее PermGen)** — для метаданных классов, управляется отдельно.
+- **Управление памятью:** Разработчик управляет размером Кучи (через -Xmx, -Xms) и Metaspace (-XX:MaxMetaspaceSize), но не напрямую стеками и объектами.
 
 ## 6. Пакеты
 
@@ -84,20 +135,92 @@ java com.example.MyClass
 - Сигнатура: `public static void main(String[] args)`.
     
 
-## 9. Package level access
+## 9. Package level access!!!
 
 - Это **default** доступ (без модификатора).
     
 - Пример:
     
+clone и finalize protected
+clone базовое клонирование объекта чтобы оно сработало нужно переопределить и вызвать super.clone
+### Что такое _package-level access_ (или _package-private_)
+
+- В Java это уровень доступа **по умолчанию**, когда у класса/метода/поля **не указан модификатор** (`public`, `protected`, `private`).
+    
+- Такой элемент доступен **только внутри одного пакета**.
+    
+- То есть все классы, находящиеся в том же пакете, могут его видеть и использовать, а классы из других пакетов — нет.
+    
+
+Пример:
 
 java
 
 ```
-class A {
-    int value; // доступен только внутри пакета
+// Файл: com.example.MyClass.java
+package com.example;
+
+class MyClass {   // нет public → доступ только внутри пакета com.example
+    void doSomething() {
+        System.out.println("Package-private method");
+    }
 }
 ```
+
+### 📌 Пример с `clone()` и `finalize()`
+
+Оба метода определены в классе `java.lang.Object` и имеют **package-private доступ** (не `public` и не `protected`):
+
+java
+
+```
+// Внутри java.lang.Object
+protected Object clone() throws CloneNotSupportedException { ... }
+
+protected void finalize() throws Throwable { ... }
+```
+
+- `clone()`:
+    
+    - По умолчанию `protected`, значит доступен внутри пакета `java.lang` и для наследников.
+        
+    - Чтобы использовать его в своём классе, обычно делают `public`-обёртку:
+        
+        java
+        
+        ```
+        public class Person implements Cloneable {
+            private String name;
+        
+            @Override
+            public Person clone() {
+                try {
+                    return (Person) super.clone(); // вызов protected метода
+                } catch (CloneNotSupportedException e) {
+                    throw new AssertionError();
+                }
+            }
+        }
+        ```
+        
+- `finalize()`:
+    
+    - Тоже `protected`.
+        
+    - Его можно переопределить в своём классе, чтобы выполнить очистку ресурсов перед сборкой мусора:
+        
+        java
+        
+        ```
+        public class Resource {
+            @Override
+            protected void finalize() throws Throwable {
+                System.out.println("Cleaning up resource...");
+                super.finalize();
+            }
+        }
+        ```
+
 
 ## 10. Доступ к `private` переменной
 
