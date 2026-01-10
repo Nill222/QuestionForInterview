@@ -1389,7 +1389,7 @@ Runnable r = new Runnable() {
     - **Сериализация/DTO:** Опционал — логика, а не данные; в DTO лучше явные nullable-поля или отдельные типы.
         
 
-# Принципы SOLIDhttps://habr.com/ru/companies/productivity_inside/articles/505430/, YAGNI, KISS, DRY
+# Принципы SOLID https://habr.com/ru/companies/productivity_inside/articles/505430/, YAGNI, KISS, DRY
 
 - **S (Single Responsibility):**
     
