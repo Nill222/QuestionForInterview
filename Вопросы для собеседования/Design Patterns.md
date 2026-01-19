@@ -91,8 +91,17 @@
     
 - Убрать `new` из клиентского кода
     
+```Java
+`public interface Transport {     
+	void move(); 
+}  
+public class Car implements Transport { }  
+public class TransportFactory {     
+	public static Transport create(String type) {         
+		if ("car".equals(type)) return new Car();        
+		 return null;     } }`
+```
 
-`public interface Transport {     void move(); }  public class Car implements Transport { }  public class TransportFactory {     public static Transport create(String type) {         if ("car".equals(type)) return new Car();         return null;     } }`
 
 📌 **Когда использовать**
 
