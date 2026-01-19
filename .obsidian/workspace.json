@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Вопросы для собеседования/Курсы java подготовка гпт.md",
+                "file": "Java/Курсы подготовки java gpt/Hibernate (Начальный уровень).md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Курсы java подготовка гпт"
+              "title": "Hibernate (Начальный уровень)"
             }
           }
         ],
@@ -185,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Вопросы для собеседования/Курсы java подготовка гпт.md",
+                "file": "Java/Курсы подготовки java gpt/Hibernate (Начальный уровень).md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура Курсы java подготовка гпт"
+              "title": "Структура Hibernate (Начальный уровень)"
             }
           }
         ],
@@ -199,7 +199,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 297.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -215,8 +215,21 @@
   },
   "active": "da047c2eab761050",
   "lastOpenFiles": [
-    "Вопросы для собеседования/SQL.md",
+    "Java/Курсы подготовки java gpt/Spring (Начальный уровень).md",
+    "Java/Курсы подготовки java gpt/Индексы, View, Процедуры.md",
+    "Java/Курсы подготовки java gpt/DML  DDL  DCL  TCL (Продвинутый уровень).md",
+    "Java/Курсы подготовки java gpt/Транзакции (Уверенный уровень)Без названия.md",
+    "Java/Курсы подготовки java gpt/SQL (Уверенный уровень).md",
+    "Java/Курсы подготовки java gpt/Многопоточность (Уверенный уровень).md",
+    "Java/Курсы подготовки java gpt/Java Классы и ООП (Продвинутый уровень).md",
+    "Java/Курсы подготовки java gpt/Коллекции (Уверенный уровень).md",
+    "Java/Курсы подготовки java gpt/JVM (Уверенный уровень).md",
+    "Java/Курсы подготовки java gpt/Hibernate (Начальный уровень).md",
+    "Java/Курсы подготовки java gpt/Без названия",
+    "Java/Курсы подготовки java gpt/Java Core (Уверенный уровень).md",
     "Вопросы для собеседования/Курсы java подготовка гпт.md",
+    "Java/Курсы подготовки java gpt",
+    "Вопросы для собеседования/SQL.md",
     "SQL/Индексы, View, Процедуры.md",
     "SQL/Транзакции.md",
     "Java/Многопоточность.md",
@@ -230,17 +243,6 @@
     "Java/Git.md",
     "Вопросы для собеседования/Design Patterns.md",
     "Вопросы для собеседования/принципы Rest.md",
-    "Вопросы для собеседования/группы патернов.md",
-    "Вопросы для собеседования/Java Collection.md",
-    "Вопросы для собеседования/Java Exceptions.md",
-    "Вопросы для собеседования/Functional Programming.md",
-    "Вопросы для собеседования/Многопоточность.md",
-    "Вопросы для собеседования/Java I O.md",
-    "Вопросы для собеседования/Java Strings.md",
-    "Вопросы для собеседования/Java Fundamentals.md",
-    "Вопросы для собеседования/JavaStreams.md",
-    "Вопросы для собеседования/Java XML.md",
-    "Вопросы для собеседования/Java TestNG JUnit.md",
     "Без названия.base",
     "Основы SQL  1.pdf",
     "Основы SQL .pdf",
@@ -253,7 +255,6 @@
     "Pasted image 20251116144356.png",
     "Pasted image 20250816014137.png",
     "Pasted image 20250815005936.png",
-    "SQL",
-    "Java"
+    "SQL"
   ]
 }
